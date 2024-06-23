@@ -16,9 +16,14 @@ const sampleDataForPhotoListItem = {
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
+  // Array helper method
+  const photos = Array.from({ length: 3 }, (_, index) => (
+    <PhotoListItem key={index} photo={sampleDataForPhotoListItem} />
+  ));
+
   return (
     <div className="App">
-      <PhotoListItem photo={sampleDataForPhotoListItem} />
+      {photos}
     </div>
   );
 };
