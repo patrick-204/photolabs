@@ -5,7 +5,7 @@ import "../styles/PhotoListItem.scss";
 const PhotoListItem = (props) => {
 
   return (
-    <div className="photo-list-item">
+    <div className="App">
       <div className="photo-details">
         <img src={props.photo.imageSource} />
       </div>
