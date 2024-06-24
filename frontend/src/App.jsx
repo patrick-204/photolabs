@@ -1,7 +1,8 @@
 import React from 'react';
 
-import PhotoListItem from './components/PhotoListItem';
-import PhotoFavButton from 'components/PhotoFavButton';
+// import PhotoListItem from './components/PhotoListItem';
+// import PhotoFavButton from 'components/PhotoFavButton';
+import PhotoList from './components/PhotoList';
 import './App.scss';
 
 // Note: Rendering a single component to build components in isolation
@@ -11,11 +12,9 @@ const App = () => {
   //   <PhotoListItem key={index} photo={sampleDataForPhotoListItem} />
   // ));
 
-  <PhotoList />
-
   return (
     <div className="App">
-      {photos}
+        <PhotoList />
     </div>
   );
 };
