@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import PhotoFavButton from "./PhotoFavButton";
 
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = (props) => {
+  const [favourite, setFavourite]  = useState(false);
+
+  const handleClick = () => {
+    setFavourite((prevFavourite) => !prevFavourite);
+  }
+
 
   return (
     <div className="photo-list__item">
@@ -20,7 +26,11 @@ const PhotoListItem = (props) => {
         </div>
       </div>
 
-      <PhotoFavButton />
+      <PhotoFavButton
+        favourite={favourite}
+        handleClick={handleClick}
+        photoId={props.photo.id} 
+      />
     </div>
   );
 };
