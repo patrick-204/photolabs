@@ -4,32 +4,32 @@ import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = (props) => {
-  const [favourite, setFavourite]  = useState(false);
+  const { photo, toggleFavourite, favourites } = props;
+
+  const isFavourite = favourites.includes(photo.id);
 
   const handleClick = () => {
-    setFavourite((prevFavourite) => !prevFavourite);
-  }
-
+    toggleFavourite(photo.id);
+  };
 
   return (
     <div className="photo-list__item">
-      <img src={props.photo.urls.full} className="photo-list__image" />
+      <img src={photo.urls.full} className="photo-list__image" />
 
       <div className="photo-list__user-details">
-        <img src={props.photo.user.profile} className="photo-list__user-profile" />
+        <img src={photo.user.profile} className="photo-list__user-profile" />
         <div className="photo-list__user-info">
-          <span>{props.photo.user.name}</span>
+          <span>{photo.user.name}</span>
           <div className="photo-list__user-location">
-            {props.photo.location.city}, 
-            {props.photo.location.country}
+            {photo.location.city}, {photo.location.country}
           </div>
         </div>
       </div>
 
       <PhotoFavButton
-        favourite={favourite}
+        favourite={isFavourite}
         handleClick={handleClick}
-        photoId={props.photo.id} 
+        photoId={photo.id}
       />
     </div>
   );
