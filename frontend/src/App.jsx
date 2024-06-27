@@ -2,7 +2,7 @@ import React from 'react';
 
 // import PhotoListItem from './components/PhotoListItem';
 // import PhotoFavButton from 'components/PhotoFavButton';
-import HomeRoute from 'components/HomeRoute';
+import HomeRoute from 'routes/HomeRoute';
 import './App.scss';
 
 // Note: Rendering a single component to build components in isolation
