@@ -13,4 +13,11 @@
     text-decoration: overline;
     color: #111;
   }
+  
+}
+
+.topic-list__link {
+  text-decoration: none; /* Remove underline */
+  font-weight: 500;
+  color: #2b2b2b;
 }
