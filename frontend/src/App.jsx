@@ -12,6 +12,7 @@ const App = () => {
 
   const handlePhotoClick = (photo) => {
     setSelectedPhoto(photo);
+    console.log("Selected photo:", photo);
   };
 
   const handleCloseModal = () => {
