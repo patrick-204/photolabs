@@ -14,12 +14,17 @@ const App = () => {
     setSelectedPhoto(photo);
   };
 
+  const handleCloseModal = () => {
+    setSelectedPhoto(null);
+  };
+
   return (
     <div className="App">
       <HomeRoute photos={photos} topics={topics} onPhotoClick={handlePhotoClick}/>
       {selectedPhoto && (
         <PhotoDetailsModal
           photo={selectedPhoto}
+          onClose={handleCloseModal}
         />
       )}
     </div>
