@@ -4,7 +4,7 @@ import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
 const PhotoList = (props) => {
-  const { photos, toggleFavourite, favourites } = props;
+  const { photos, onPhotoClick, toggleFavourite, favourites } = props;
 
   return (
     <ul className="photo-list">
@@ -12,6 +12,7 @@ const PhotoList = (props) => {
         <PhotoListItem
           key={photo.id}
           photo={photo}
+          onPhotoClick={onPhotoClick}
           toggleFavourite={toggleFavourite}
           favourites={favourites}
         />
