@@ -15,7 +15,9 @@ const App = () => {
   };
 
   const handleCloseModal = () => {
-    setSelectedPhoto(null);
+    if (selectedPhoto !== null) {
+      setSelectedPhoto(null);
+    }
   };
 
   return (
