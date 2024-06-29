@@ -70,6 +70,7 @@ const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    // Fetch initial data
     fetch('http://localhost:8001/api/photos')
       .then(res => res.json())
       .then(data => {
@@ -83,9 +84,7 @@ const useApplicationData = () => {
       .catch(error => {
         console.error('Error fetching photos:', error);
       });
-  }, []);
 
-  useEffect(() => {
     fetch('http://localhost:8001/api/topics')
       .then(res => res.json())
       .then(data => {
@@ -100,6 +99,22 @@ const useApplicationData = () => {
         console.error('Error fetching topics:', error);
       });
   }, []);
+
+  const fetchPhotosByTopic = (topicId) => {
+    fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: ACTIONS.SET_PHOTO_DATA,
+          payload: {
+            photos: data,
+          },
+        });
+      })
+      .catch(error => {
+        console.error(`Error fetching photos for topic ${topicId}:`, error);
+      });
+  };
 
   const updateToFavPhotoIds = (photoId) => {
     dispatch({
@@ -136,6 +151,7 @@ const useApplicationData = () => {
 
   return {
     state,
+    fetchPhotosByTopic,
     updateToFavPhotoIds,
     removeFromFavPhotoIds,
     setPhotoSelected,

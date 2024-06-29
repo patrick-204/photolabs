@@ -1,13 +1,14 @@
 import React from 'react';
+
 import FavBadge from './FavBadge';
 import TopicList from './TopicList';
-import '../styles/TopNavigationBar.scss';
+import '../styles/TopNavigationBar.scss'
 
 const TopNavigation = (props) => {
   const { topics, favouritesCount, onTopicClick } = props;
 
   const handleTopicClick = (topicId) => {
-    onTopicClick(topicId);
+    onTopicClick(topicId); 
   };
 
   return (
