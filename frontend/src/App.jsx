@@ -7,33 +7,33 @@ import './App.scss';
 import photos from './mocks/photos';
 import topics from './mocks/topics';
 
-// Note: Rendering a single component to build components in isolation
 const App = () => {
   const {
-    state,
-    onPhotoSelect,
+    selectedPhoto,
+    favouritePhotoIds,
     updateToFavPhotoIds,
+    setPhotoSelected,
     onClosePhotoDetailsModal,
+    onLoadTopic,
   } = useApplicationData();
-
-  const { selectedPhoto } = state;
 
   return (
     <div className="App">
       <HomeRoute
         photos={photos}
         topics={topics}
-        onPhotoClick={onPhotoSelect}
+        onPhotoClick={setPhotoSelected}
         toggleFavourite={updateToFavPhotoIds}
-        favourites={state.favouritePhotoIds}
+        favourites={favouritePhotoIds}
+        onLoadTopic={onLoadTopic}
       />
       {selectedPhoto && (
         <PhotoDetailsModal
           photo={selectedPhoto}
-          similarPhotos={photos} // Example: Replace with actual similar photos data
+          similarPhotos={photos} // Replace with actual similar photos data
           onClose={onClosePhotoDetailsModal}
           toggleFavourite={updateToFavPhotoIds}
-          favourites={state.favouritePhotoIds}
+          favourites={favouritePhotoIds}
         />
       )}
     </div>

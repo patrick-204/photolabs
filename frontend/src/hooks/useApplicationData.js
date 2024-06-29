@@ -1,31 +1,39 @@
-import { useState, useEffect } from 'react';
-import photos from 'mocks/photos';
+import { useState } from 'react';
+
+// Simulated API data or imports
+import photos from '../mocks/photos';
+import topics from '../mocks/topics';
 
 const useApplicationData = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+
   const [favouritePhotoIds, setFavouritePhotoIds] = useState([]);
 
-  // For when have to load data from API
-  useEffect(() => {
-    // Dummy load of API
-    const loadData = () => {
-      setTimeout(() => {
-        console.log('Data loaded');
-      }, 1000);
-    };
+  const [topicsState, setTopicsState] = useState({
+    topics: [],
+    selectedTopic: null,
+  });
 
-    loadData();
-  }, []);
+  // Simulate initial data loading (photos and topics)
+  useState(() => {
+    setSelectedPhoto(null); 
+    setFavouritePhotoIds([]); 
+    
+    setTopicsState(prevState => ({
+      ...prevState,
+      topics,
+    }));
+  });
 
   const updateToFavPhotoIds = (photoId) => {
     if (favouritePhotoIds.includes(photoId)) {
-      setFavouritePhotoIds(favouritePhotoIds.filter(id => id !== photoId));
+      setFavouritePhotoIds(prevIds => prevIds.filter(id => id !== photoId));
     } else {
-      setFavouritePhotoIds([...favouritePhotoIds, photoId]);
+      setFavouritePhotoIds(prevIds => [...prevIds, photoId]);
     }
   };
 
-  const onPhotoSelect = (photo) => {
+  const setPhotoSelected = (photo) => {
     setSelectedPhoto(photo);
   };
 
@@ -33,14 +41,20 @@ const useApplicationData = () => {
     setSelectedPhoto(null);
   };
 
+  // Load topics
+  const onLoadTopic = (topicId) => {
+    const selectedTopic = topicsState.topics.find(topic => topic.id === topicId);
+    setTopicsState(prevState => ({ ...prevState, selectedTopic }));
+  };
+
   return {
-    state: {
-      selectedPhoto,
-      favouritePhotoIds,
-    },
-    onPhotoSelect,
+    selectedPhoto,
+    favouritePhotoIds,
+    topicsState,
     updateToFavPhotoIds,
+    setPhotoSelected,
     onClosePhotoDetailsModal,
+    onLoadTopic,
   };
 };
 
