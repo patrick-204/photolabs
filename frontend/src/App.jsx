@@ -1,38 +1,49 @@
-import React from 'react';
-
-import useApplicationData from 'hooks/useApplicationData';
-import HomeRoute from 'routes/HomeRoute';
-import PhotoDetailsModal from 'routes/PhotoDetailsModal';
-import './App.scss';
-import photos from './mocks/photos';
-import topics from './mocks/topics';
+import React from "react";
+import useApplicationData from "./hooks/useApplicationData";
+import HomeRoute from "./routes/HomeRoute";
+import PhotoDetailsModal from "./routes/PhotoDetailsModal";
+import "./App.scss";
+import photos from "./mocks/photos"; 
+import topics from "./mocks/topics"; 
 
 const App = () => {
   const {
-    selectedPhoto,
-    favouritePhotoIds,
+    state,
     updateToFavPhotoIds,
+    removeFromFavPhotoIds,
     setPhotoSelected,
     onClosePhotoDetailsModal,
-    onLoadTopic,
   } = useApplicationData();
+
+  const { selectedPhoto, favouritePhotoIds } = state;
 
   return (
     <div className="App">
       <HomeRoute
-        photos={photos}
         topics={topics}
+        photos={photos}
         onPhotoClick={setPhotoSelected}
-        toggleFavourite={updateToFavPhotoIds}
+        toggleFavourite={(photoId) => {
+          if (favouritePhotoIds.includes(photoId)) {
+            removeFromFavPhotoIds(photoId);
+          } else {
+            updateToFavPhotoIds(photoId);
+          }
+        }}
         favourites={favouritePhotoIds}
-        onLoadTopic={onLoadTopic}
       />
       {selectedPhoto && (
         <PhotoDetailsModal
           photo={selectedPhoto}
-          similarPhotos={photos} // Replace with actual similar photos data
+          similarPhotos={photos} 
           onClose={onClosePhotoDetailsModal}
-          toggleFavourite={updateToFavPhotoIds}
+          toggleFavourite={(photoId) => {
+            if (favouritePhotoIds.includes(photoId)) {
+              removeFromFavPhotoIds(photoId);
+            } else {
+              updateToFavPhotoIds(photoId);
+            }
+          }}
           favourites={favouritePhotoIds}
         />
       )}
