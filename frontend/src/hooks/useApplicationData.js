@@ -52,6 +52,12 @@ function reducer(state, action) {
         topicData: action.payload.topics,
       };
 
+      case ACTIONS.SET_ERROR:
+        return {
+          ...state,
+          error: action.payload.error,
+        };
+
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
@@ -81,7 +87,12 @@ const useApplicationData = () => {
         });
       })
       .catch(error => {
-        console.error('Error fetching photos:', error);
+        dispatch({
+          type: ACTIONS.SET_ERROR,
+          payload: {
+            error: error.message, 
+          },
+        });
       });
   }, []);
 
@@ -97,7 +108,12 @@ const useApplicationData = () => {
         });
       })
       .catch(error => {
-        console.error('Error fetching topics:', error);
+        dispatch({
+          type: ACTIONS.SET_ERROR,
+          payload: {
+            error: error.message,
+          },
+        });
       });
   }, []);
 
