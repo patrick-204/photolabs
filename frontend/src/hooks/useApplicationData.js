@@ -52,12 +52,6 @@ function reducer(state, action) {
         topicData: action.payload.topics,
       };
 
-      case ACTIONS.SET_ERROR:
-        return {
-          ...state,
-          error: action.payload.error,
-        };
-
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
@@ -87,12 +81,7 @@ const useApplicationData = () => {
         });
       })
       .catch(error => {
-        dispatch({
-          type: ACTIONS.SET_ERROR,
-          payload: {
-            error: error.message, 
-          },
-        });
+        console.error('Error fetching photos:', error);
       });
   }, []);
 
@@ -108,12 +97,7 @@ const useApplicationData = () => {
         });
       })
       .catch(error => {
-        dispatch({
-          type: ACTIONS.SET_ERROR,
-          payload: {
-            error: error.message,
-          },
-        });
+        console.error('Error fetching topics:', error);
       });
   }, []);
 
@@ -150,32 +134,12 @@ const useApplicationData = () => {
     });
   };
 
-  const setPhotoData = (photos) => {
-    dispatch({
-      type: ACTIONS.SET_PHOTO_DATA,
-      payload: {
-        photos,
-      },
-    });
-  };
-
-  const setTopicData = (topics) => {
-    dispatch({
-      type: ACTIONS.SET_TOPIC_DATA,
-      payload: {
-        topics,
-      },
-    });
-  };
-
   return {
     state,
     updateToFavPhotoIds,
     removeFromFavPhotoIds,
     setPhotoSelected,
     onClosePhotoDetailsModal,
-    setPhotoData,
-    setTopicData,
   };
 };
 

@@ -4,10 +4,21 @@ import PhotoList from 'components/PhotoList';
 import '../styles/HomeRoute.scss';
 
 const HomeRoute = (props) => {
+  const { topics, favourites, toggleFavourite, photos, onPhotoClick } = props;
+
   return (
     <div className="home-route">
-      <TopNavigation topics={props.topics} favouritesCount={props.favourites.length} toggleFavourite={props.toggleFavourite} />
-      <PhotoList photos={props.photos} favourites={props.favourites} toggleFavourite={props.toggleFavourite} onPhotoClick={props.onPhotoClick} />
+      <TopNavigation
+        topics={topics}
+        favouritesCount={favourites.length}
+        toggleFavourite={toggleFavourite}
+      />
+      <PhotoList
+        photos={photos}
+        favourites={favourites}
+        toggleFavourite={toggleFavourite}
+        onPhotoClick={onPhotoClick}
+      />
     </div>
   );
 };
