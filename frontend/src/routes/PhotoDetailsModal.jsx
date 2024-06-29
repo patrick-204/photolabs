@@ -14,9 +14,15 @@ const PhotoDetailsModal = (props) => {
         <img src={closeSymbol} alt="close symbol" />
       </button>
       <img src={photo.urls.full} alt={photo.alt_description} className="photo-details-modal__image" />
-      <div className="photo-details-modal__header">{photo.description}
+      
+      <div className="photo-details-modal__header">
+        <h2>{photo.description}</h2>
         <div className="photo-details-modal__photographer-details">
-          <img src={photo.user.profile} alt={`${photo.user.name}'s profile`} className="photo-details-modal__photographer-profile" />
+          <img
+            src={photo.user.profile}
+            alt={`${photo.user.name}'s profile`}
+            className="photo-details-modal__photographer-profile"
+          />
           <div className="photo-details-modal__photographer-info">
             <div>{photo.user.name}</div>
             <div className="photo-details-modal__photographer-location">
@@ -26,15 +32,15 @@ const PhotoDetailsModal = (props) => {
         </div>
       </div>
 
-      {/* Similar Photos */}
-      {similarPhotos && similarPhotos.length > 0 && (
-        <div className="photo-details-modal__images">
+      {/* Similar Photos Section */}
+      {similarPhotos && (
+        <div className="photo-details-modal__similar-photos">
           <h3>Similar Photos</h3>
           <PhotoList photos={similarPhotos} />
         </div>
       )}
     </div>
-  )
+  );
 };
 
 export default PhotoDetailsModal;

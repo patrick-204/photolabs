@@ -12,7 +12,7 @@ const App = () => {
 
   // Temporary similar photos 
   const similarPhotos = photos;
-  console.log(similarPhotos);
+  // console.log(similarPhotos);
 
   const handlePhotoClick = (photo) => {
     setSelectedPhoto(photo);
@@ -28,7 +28,7 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute photos={photos} topics={topics} onPhotoClick={handlePhotoClick}/>
-      {selectedPhoto && similarPhotos.length > 0 && (
+      {selectedPhoto && similarPhotos && (
         <PhotoDetailsModal
           photo={selectedPhoto}
           similarPhotos={similarPhotos}
