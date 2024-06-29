@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -43,13 +43,13 @@ function reducer(state, action) {
     case ACTIONS.SET_PHOTO_DATA:
       return {
         ...state,
-        photos: action.payload.photos,
+        photoData: action.payload.photos,
       };
 
     case ACTIONS.SET_TOPIC_DATA:
       return {
         ...state,
-        topics: action.payload.topics,
+        topicData: action.payload.topics,
       };
 
     default:
@@ -62,10 +62,44 @@ const initialState = {
   topics: [],
   favouritePhotoIds: [],
   selectedPhoto: null,
+  photoData: [],
+  topicData: [],
 };
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    fetch('http://localhost:8001/api/photos')
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: ACTIONS.SET_PHOTO_DATA,
+          payload: {
+            photos: data,
+          },
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching photos:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8001/api/topics')
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: ACTIONS.SET_TOPIC_DATA,
+          payload: {
+            topics: data,
+          },
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching topics:', error);
+      });
+  }, []);
 
   const updateToFavPhotoIds = (photoId) => {
     dispatch({

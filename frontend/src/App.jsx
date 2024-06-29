@@ -3,8 +3,7 @@ import useApplicationData from './hooks/useApplicationData';
 import HomeRoute from './routes/HomeRoute';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';
 import './App.scss';
-import photos from './mocks/photos';
-import topics from './mocks/topics';
+import topics from './mocks/topics'; 
 
 const App = () => {
   const {
@@ -15,13 +14,13 @@ const App = () => {
     onClosePhotoDetailsModal,
   } = useApplicationData();
 
-  const { selectedPhoto, favouritePhotoIds } = state;
+  const { selectedPhoto, favouritePhotoIds, photoData, topicData } = state; 
 
   return (
     <div className="App">
       <HomeRoute
-        topics={topics}
-        photos={photos}
+        topics={topicData}
+        photos={photoData} 
         onPhotoClick={setPhotoSelected}
         toggleFavourite={(photoId) => {
           if (favouritePhotoIds.includes(photoId)) {
@@ -35,7 +34,7 @@ const App = () => {
       {selectedPhoto && (
         <PhotoDetailsModal
           photo={selectedPhoto}
-          similarPhotos={photos}
+          similarPhotos={photoData} 
           onClose={onClosePhotoDetailsModal}
           toggleFavourite={(photoId) => {
             if (favouritePhotoIds.includes(photoId)) {
