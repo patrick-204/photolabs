@@ -6,7 +6,7 @@ import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 
 const PhotoDetailsModal = (props) => {
-  const { photo, similarPhotos, onClose, toggleFavourite, favourites } = props
+  const { photo, similarPhotos, onClose, toggleFavourite, favourites = [] } = props
 
   // Check to see if photo is favourited
   const isFavourite = favourites.includes(photo.id);
@@ -41,13 +41,11 @@ const PhotoDetailsModal = (props) => {
         </div>
       </div>
 
-
-      {/* Similar Photos Section */}
       {similarPhotos && (
         <div className="photo-details-modal__similar-photos">
           <h3>Similar Photos</h3>
-          <PhotoList 
-            photos={similarPhotos} 
+          <PhotoList
+            photos={similarPhotos}
             toggleFavourite={toggleFavourite}
             favourites={favourites}
           />
