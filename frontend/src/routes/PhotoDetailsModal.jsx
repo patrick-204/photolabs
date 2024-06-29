@@ -1,19 +1,28 @@
 import React from 'react';
 
 import PhotoList from 'components/PhotoList';
+import PhotoFavButton from 'components/PhotoFavButton';
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 
 const PhotoDetailsModal = (props) => {
-  const { photo, similarPhotos, onClose } = props;
-  console.log(similarPhotos);
+  const { photo, similarPhotos, onClose, toggleFavourite, favourites } = props
+
+  // Check to see if photo is favourited
+  const isFavourite = favourites.includes(photo.id);
+
+  const handleFavouriteClick = () => {
+    toggleFavourite(photo.id);
+  };
 
   return (
     <div className="photo-details-modal">
       <button className="photo-details-modal__close-button" onClick={onClose}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
+      
       <img src={photo.urls.full} alt={photo.alt_description} className="photo-details-modal__image" />
+      <PhotoFavButton favourite={isFavourite} handleClick={handleFavouriteClick} />
       
       <div className="photo-details-modal__header">
         <h2>{photo.description}</h2>
@@ -31,6 +40,7 @@ const PhotoDetailsModal = (props) => {
           </div>
         </div>
       </div>
+
 
       {/* Similar Photos Section */}
       {similarPhotos && (

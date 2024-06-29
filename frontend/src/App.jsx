@@ -9,6 +9,7 @@ import topics from './mocks/topics';
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [favourites, setFavourites] = useState([]);
 
   // Temporary similar photos 
   const similarPhotos = photos;
@@ -25,6 +26,14 @@ const App = () => {
     }
   };
 
+  const toggleFavourite = (photoId) => {
+    if (favourites.includes(photoId)) {
+      setFavourites(favourites.filter(id => id !== photoId));
+    } else {
+      setFavourites([...favourites, photoId]);
+    }
+  };
+
   return (
     <div className="App">
       <HomeRoute photos={photos} topics={topics} onPhotoClick={handlePhotoClick}/>
@@ -33,6 +42,8 @@ const App = () => {
           photo={selectedPhoto}
           similarPhotos={similarPhotos}
           onClose={handleCloseModal}
+          toggleFavourite={toggleFavourite}
+          favourites={favourites}
         />
       )}
     </div>
