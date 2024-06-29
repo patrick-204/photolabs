@@ -70,7 +70,6 @@ const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    // Fetch initial data
     fetch('http://localhost:8001/api/photos')
       .then(res => res.json())
       .then(data => {
@@ -100,7 +99,15 @@ const useApplicationData = () => {
       });
   }, []);
 
-  const fetchPhotosByTopic = (topicId) => {
+  const fetchPhotosByTopic = (topicSlug) => {
+    const topic = state.topicData.find(topic => topic.slug === topicSlug);
+    if (!topic) {
+      console.error(`Topic with slug ${topicSlug} not found.`);
+      return;
+    }
+
+    const topicId = topic.id;
+
     fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
       .then(res => res.json())
       .then(data => {

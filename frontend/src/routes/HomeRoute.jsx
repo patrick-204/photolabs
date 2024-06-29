@@ -6,8 +6,8 @@ import '../styles/HomeRoute.scss';
 const HomeRoute = (props) => {
   const { topics, favourites, toggleFavourite, photos, onPhotoClick, fetchPhotosByTopic } = props;
 
-  const handleTopicClick = (topicId) => {
-    fetchPhotosByTopic(topicId);
+  const handleTopicClick = (topicSlug) => {
+    fetchPhotosByTopic(topicSlug);
   };
 
   return (
