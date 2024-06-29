@@ -36,7 +36,13 @@ const App = () => {
 
   return (
     <div className="App">
-      <HomeRoute photos={photos} topics={topics} onPhotoClick={handlePhotoClick}/>
+      <HomeRoute 
+        photos={photos} 
+        topics={topics} 
+        onPhotoClick={handlePhotoClick}
+        toggleFavourite={toggleFavourite}
+        favourites={favourites}
+      />
       {selectedPhoto && similarPhotos && (
         <PhotoDetailsModal
           photo={selectedPhoto}
