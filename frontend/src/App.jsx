@@ -1,10 +1,10 @@
-import React from "react";
-import useApplicationData from "./hooks/useApplicationData";
-import HomeRoute from "./routes/HomeRoute";
-import PhotoDetailsModal from "./routes/PhotoDetailsModal";
-import "./App.scss";
-import photos from "./mocks/photos"; 
-import topics from "./mocks/topics"; 
+import React from 'react';
+import useApplicationData from './hooks/useApplicationData';
+import HomeRoute from './routes/HomeRoute';
+import PhotoDetailsModal from './routes/PhotoDetailsModal';
+import './App.scss';
+import photos from './mocks/photos';
+import topics from './mocks/topics';
 
 const App = () => {
   const {
@@ -35,7 +35,7 @@ const App = () => {
       {selectedPhoto && (
         <PhotoDetailsModal
           photo={selectedPhoto}
-          similarPhotos={photos} 
+          similarPhotos={photos}
           onClose={onClosePhotoDetailsModal}
           toggleFavourite={(photoId) => {
             if (favouritePhotoIds.includes(photoId)) {
