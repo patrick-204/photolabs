@@ -10,6 +10,10 @@ import topics from './mocks/topics';
 const App = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
+  // Temporary similar photos 
+  const similarPhotos = photos;
+  console.log(similarPhotos);
+
   const handlePhotoClick = (photo) => {
     setSelectedPhoto(photo);
     console.log("Selected photo:", photo);
@@ -24,9 +28,10 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute photos={photos} topics={topics} onPhotoClick={handlePhotoClick}/>
-      {selectedPhoto && (
+      {selectedPhoto && similarPhotos.length > 0 && (
         <PhotoDetailsModal
           photo={selectedPhoto}
+          similarPhotos={similarPhotos}
           onClose={handleCloseModal}
         />
       )}
