@@ -4,18 +4,14 @@ import PhotoFavButton from './PhotoFavButton';
 import '../styles/PhotoListItem.scss';
 
 const PhotoListItem = (props) => {
-  const { photo, toggleFavourite, favourites = [], onPhotoClick } = props; // Default favourites to an empty array
-
+  const { photo, toggleFavourite, favourites = [], onPhotoClick } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isFavourite = favourites.includes(photo.id);
 
-  const isFavourite = favourites.includes(photo.id); // Ensure favourites is an array before using includes
-
-  // handles clicking on favourites icon
   const handleClick = () => {
     toggleFavourite(photo.id);
   };
 
-  // handles clicking on photo
   const handlePhotoClick = () => {
     setIsModalOpen(true);
     onPhotoClick(photo);
@@ -23,7 +19,12 @@ const PhotoListItem = (props) => {
 
   return (
     <div className="photo-list__item">
-      <img src={photo.urls.full} className="photo-list__image" onClick={handlePhotoClick} />
+      <div className="photo-list__image-container">
+        <img src={photo.urls.full} className="photo-list__image" onClick={handlePhotoClick} />
+        <div className="photo-list__fav-button">
+          <PhotoFavButton favourite={isFavourite} handleClick={handleClick} photoId={photo.id} />
+        </div>
+      </div>
 
       <div className="photo-list__user-details">
         <img src={photo.user.profile} className="photo-list__user-profile" />
@@ -34,8 +35,6 @@ const PhotoListItem = (props) => {
           </div>
         </div>
       </div>
-
-      <PhotoFavButton favourite={isFavourite} handleClick={handleClick} photoId={photo.id} />
     </div>
   );
 };
