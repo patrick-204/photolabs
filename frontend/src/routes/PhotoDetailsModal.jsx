@@ -26,7 +26,8 @@ const PhotoDetailsModal = (props) => {
 
         <div className="photo-details-modal__right">
           <img src={photo.urls.full} alt={photo.alt_description} className="photo-details-modal__image" />
-
+        </div>
+        
           <div className="photo-details-modal__header">
             <h2>{photo.description}</h2>
             <div className="photo-details-modal__photographer-details">
@@ -40,7 +41,6 @@ const PhotoDetailsModal = (props) => {
                 <div className="photo-details-modal__photographer-location">
                   {photo.location.city}, {photo.location.country}
                 </div>
-              </div>
             </div>
           </div>
         </div>
