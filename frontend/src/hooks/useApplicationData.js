@@ -7,6 +7,7 @@ export const ACTIONS = {
   CLOSE_PHOTO_DETAILS_MODAL: 'CLOSE_PHOTO_DETAILS_MODAL',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS', // New action type for fetching photos by topic
 };
 
 function reducer(state, action) {
@@ -52,6 +53,12 @@ function reducer(state, action) {
         topicData: action.payload.topics,
       };
 
+    case ACTIONS.GET_PHOTOS_BY_TOPICS:
+      return {
+        ...state,
+        fetchingPhotos: true, // Set fetching state
+      };
+
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
@@ -64,12 +71,14 @@ const initialState = {
   selectedPhoto: null,
   photoData: [],
   topicData: [],
+  fetchingPhotos: false, // Initial state for fetching photos
 };
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    // Fetch initial data
     fetch('http://localhost:8001/api/photos')
       .then(res => res.json())
       .then(data => {
@@ -99,15 +108,11 @@ const useApplicationData = () => {
       });
   }, []);
 
-  const fetchPhotosByTopic = (topicSlug) => {
-    const topic = state.topicData.find(topic => topic.slug === topicSlug);
-    if (!topic) {
-      console.error(`Topic with slug ${topicSlug} not found.`);
-      return;
-    }
+  const fetchPhotosByTopic = (topicId) => {
+    // Dispatch action to indicate fetching photos by topic
+    dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS });
 
-    const topicId = topic.id;
-
+    // Fetch photos for the specific topic
     fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
       .then(res => res.json())
       .then(data => {

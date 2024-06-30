@@ -15,7 +15,7 @@ const TopNavigation = (props) => {
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
       <TopicList topics={topics} onTopicClick={handleTopicClick} />
-      {favouritesCount > 0 && <FavBadge favouritesCount={favouritesCount} />}
+      {<FavBadge favouritesCount={favouritesCount} />}
     </div>
   );
 };
