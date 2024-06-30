@@ -8,7 +8,6 @@ import closeSymbol from '../assets/closeSymbol.svg';
 const PhotoDetailsModal = (props) => {
   const { photo, similarPhotos, onClose, toggleFavourite, favourites = [] } = props
 
-  // Check to see if photo is favourited
   const isFavourite = favourites.includes(photo.id);
 
   const handleFavouriteClick = () => {
