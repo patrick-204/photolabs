@@ -15,8 +15,12 @@ const TopNavigation = (props) => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`/api/photos?search=${searchTerm}`);
-      console.log('Searcg results:', response.data);
+      const response = await axios.get(`http://localhost:8001/api/photos`, {
+        params: {
+          search: searchTerm
+        }
+      });
+      console.log('Search results:', response.data);
     } catch (error) {
       console.error('Error finding photos:', error);
     }

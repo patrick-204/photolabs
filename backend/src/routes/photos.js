@@ -1,15 +1,16 @@
 const router = require("express").Router();
 
-module.exports = db => {
-  router.get("/photos", (request, response) => {
+module.exports = (db) => {
+  router.get("/photos", async (request, response) => {
+    const { search } = request.query;
     const protocol = request.protocol;
     const host = request.hostname;
     const port = process.env.PORT || 8001;
     const serverUrl = `${protocol}://${host}:${port}`;
 
-    db.query(`
+    let query = `
       SELECT 
-      json_agg(
+        json_agg(
           json_build_object(
             'id', photo.id,
             'urls', json_build_object(
@@ -54,10 +55,34 @@ module.exports = db => {
           )
         ) as photo_data
       FROM photo
-      JOIN user_account ON user_account.id = photo.user_id;
-    `).then(({ rows }) => {
-      response.json(rows[0].photo_data);
-    });
+      JOIN user_account ON user_account.id = photo.user_id
+    `;
+
+    if (search) {
+      const searchTerm = `%${search}%`; 
+      query += `
+        WHERE 
+          user_account.username ILIKE $1
+          OR photo.city ILIKE $1
+          OR photo.country ILIKE $1
+      `;
+
+      try {
+        const { rows } = await db.query(query, [searchTerm]);
+        response.json(rows[0].photo_data);
+      } catch (error) {
+        console.error('Error executing query:', error);
+        response.status(500).json({ error: 'Internal Server Error' });
+      }
+    } else {
+      try {
+        const { rows } = await db.query(query);
+        response.json(rows[0].photo_data);
+      } catch (error) {
+        console.error('Error executing query:', error);
+        response.status(500).json({ error: 'Internal Server Error' });
+      }
+    }
   });
 
   return router;
