@@ -22,7 +22,7 @@ PhotoLabs is a React-based single-page application (SPA) that allows users to vi
 
 Follow the below steps to set up and run the PhotoLabs project:
 
-1. Clone this repository: `git clone https://github.com/your-username/photolabs`
+1. Clone this repository: `git clone https://github.com/patrick-204/photolabs.git`
 2. Install dependencies for both frontend and backend:
    ```sh
    cd frontend
@@ -30,11 +30,19 @@ Follow the below steps to set up and run the PhotoLabs project:
    cd ../backend
    npm install
 3. Start the frontend development server:
-  ```sh
-  cd frontend
-  npm start
+   ```sh
+   cd frontend
+   npm start
 4. Read backend/readme for further setup details.
 5. Start the backend server:
-  ```sh
-  cd backend
-  npm start
+   ```sh
+   cd backend
+   npm start
+
+## Technologies Used
+
+- React
+- HTML
+- SCSS
+- JavaScript
+- PSQL
