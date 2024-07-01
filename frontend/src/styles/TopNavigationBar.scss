@@ -18,3 +18,38 @@
   text-underline-position: auto;
   margin-left: 24px;
 }
+
+.top-nav-bar__search {
+  margin: 0 24px; 
+}
+
+.top-nav-bar__search input[type="text"] {
+  width: 50%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.top-nav-bar__search input[type="text"]:focus {
+  border-color: black; 
+}
+
+.top-nav-bar__search button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.top-nav-bar__search button:hover {
+  background-color: #0056b3; 
+}
