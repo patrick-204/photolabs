@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
-
 import FavBadge from './FavBadge';
 import TopicList from './TopicList';
-import '../styles/TopNavigationBar.scss'
+import '../styles/TopNavigationBar.scss';
 import axios from 'axios';
 
 const TopNavigation = (props) => {
-  const { topics, favouritesCount, onTopicClick } = props;
+  const { topics, favouritesCount, onTopicClick, setSearchResults } = props;
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleTopicClick = (topicId) => {
-    onTopicClick(topicId); 
+    onTopicClick(topicId);
   };
 
   const handleSearch = async () => {
     try {
       const response = await axios.get(`http://localhost:8001/api/photos`, {
         params: {
-          search: searchTerm
-        }
+          search: searchTerm,
+        },
       });
-      console.log('Search results:', response.data);
+      setSearchResults(response.data); // Update search results state
     } catch (error) {
       console.error('Error finding photos:', error);
     }
@@ -39,10 +38,10 @@ const TopNavigation = (props) => {
       <span className="top-nav-bar__logo">PhotoLabs</span>
       <div className="top-nav-bar__search">
         <input
-        type="text"
-        placeholder="Search Photos..."
-        value={searchTerm}
-        onChange={handleChange}
+          type="text"
+          placeholder="Search Photos..."
+          value={searchTerm}
+          onChange={handleChange}
         />
         <button onClick={handleButtonClick}>Search</button>
       </div>

@@ -4,11 +4,14 @@ import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
 const PhotoList = (props) => {
-  const { photos, onPhotoClick, toggleFavourite, favourites } = props;
+  const { photos, displayedPhotos, onPhotoClick, toggleFavourite, favourites } = props;
+
+  // Ensure displayedPhotos is an array before mapping
+  const photosToDisplay = displayedPhotos ? displayedPhotos : photos;
 
   return (
     <ul className="photo-list">
-      {photos.map((photo) => (
+      {photosToDisplay.map((photo) => (
         <PhotoListItem
           key={photo.id}
           photo={photo}
