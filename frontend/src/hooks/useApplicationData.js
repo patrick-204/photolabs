@@ -7,7 +7,7 @@ export const ACTIONS = {
   CLOSE_PHOTO_DETAILS_MODAL: 'CLOSE_PHOTO_DETAILS_MODAL',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
-  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS', 
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS',
 };
 
 function reducer(state, action) {
@@ -53,12 +53,6 @@ function reducer(state, action) {
         topicData: action.payload.topics,
       };
 
-    case ACTIONS.GET_PHOTOS_BY_TOPICS:
-      return {
-        ...state,
-        fetchingPhotos: true, 
-      };
-
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
@@ -69,9 +63,8 @@ const initialState = {
   topics: [],
   favouritePhotoIds: [],
   selectedPhoto: null,
-  photoData: [],
+  photoData: [], 
   topicData: [],
-  fetchingPhotos: false, 
 };
 
 const useApplicationData = () => {
@@ -79,8 +72,8 @@ const useApplicationData = () => {
 
   useEffect(() => {
     fetch('http://localhost:8001/api/photos')
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         dispatch({
           type: ACTIONS.SET_PHOTO_DATA,
           payload: {
@@ -88,13 +81,13 @@ const useApplicationData = () => {
           },
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching photos:', error);
       });
 
     fetch('http://localhost:8001/api/topics')
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         dispatch({
           type: ACTIONS.SET_TOPIC_DATA,
           payload: {
@@ -102,17 +95,17 @@ const useApplicationData = () => {
           },
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching topics:', error);
       });
   }, []);
 
   const fetchPhotosByTopic = (topicId) => {
-    dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS });
 
     fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
         dispatch({
           type: ACTIONS.SET_PHOTO_DATA,
           payload: {
@@ -120,7 +113,7 @@ const useApplicationData = () => {
           },
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(`Error fetching photos for topic ${topicId}:`, error);
       });
   };

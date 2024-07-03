@@ -11,7 +11,7 @@ const App = () => {
     removeFromFavPhotoIds,
     setPhotoSelected,
     onClosePhotoDetailsModal,
-    fetchPhotosByTopic, 
+    fetchPhotosByTopic,
   } = useApplicationData();
 
   const { selectedPhoto, favouritePhotoIds, photoData, topicData } = state;
@@ -28,11 +28,11 @@ const App = () => {
     <div className="App">
       <HomeRoute
         topics={topicData}
-        photos={photoData}
+        photos={photoData} 
         onPhotoClick={setPhotoSelected}
         toggleFavourite={handleToggleFavourite}
         favourites={favouritePhotoIds}
-        fetchPhotosByTopic={fetchPhotosByTopic} 
+        fetchPhotosByTopic={fetchPhotosByTopic}
       />
       {selectedPhoto && (
         <PhotoDetailsModal

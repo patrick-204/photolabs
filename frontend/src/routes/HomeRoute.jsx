@@ -6,20 +6,16 @@ import '../styles/HomeRoute.scss';
 const HomeRoute = (props) => {
   const { topics, favourites, toggleFavourite, photos, onPhotoClick, fetchPhotosByTopic } = props;
 
-  const handleTopicClick = (topicSlug) => {
-    fetchPhotosByTopic(topicSlug);
-  };
-
   return (
     <div className="home-route">
       <TopNavigation
         topics={topics}
         favouritesCount={favourites.length}
         toggleFavourite={toggleFavourite}
-        onTopicClick={handleTopicClick}
+        onTopicClick={fetchPhotosByTopic}
       />
       <PhotoList
-        photos={photos}
+        photos={photos} 
         favourites={favourites}
         toggleFavourite={toggleFavourite}
         onPhotoClick={onPhotoClick}
