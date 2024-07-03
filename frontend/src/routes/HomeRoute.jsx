@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 import '../styles/HomeRoute.scss';
@@ -6,6 +6,11 @@ import '../styles/HomeRoute.scss';
 const HomeRoute = (props) => {
   const { topics, favourites, toggleFavourite, onPhotoClick, fetchPhotosByTopic, photos } = props;
   const [displayedPhotos, setDisplayedPhotos] = useState([]);
+
+  // Displays all photos on component mount
+  useEffect(() => {
+    setDisplayedPhotos(photos);
+  }, [photos]);
 
   const handleTopicClick = (topicSlug) => {
     fetchPhotosByTopic(topicSlug);
@@ -23,14 +28,14 @@ const HomeRoute = (props) => {
         toggleFavourite={toggleFavourite}
         onTopicClick={handleTopicClick}
         setSearchResults={handleSearchResults}
-        allPhotos={photos} // Pass all photos for management
+        allPhotos={photos} 
       />
       <PhotoList
-        photos={displayedPhotos ? displayedPhotos : photos} // Display search results if available, otherwise all photos
+        photos={displayedPhotos}
         favourites={favourites}
         toggleFavourite={toggleFavourite}
         onPhotoClick={onPhotoClick}
-        allPhotos={photos} // Pass all photos for management
+        allPhotos={photos}
       />
     </div>
   );

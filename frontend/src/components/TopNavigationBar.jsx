@@ -19,7 +19,7 @@ const TopNavigation = (props) => {
           search: searchTerm,
         },
       });
-      setSearchResults(response.data); // Update search results state
+      setSearchResults(response.data); 
     } catch (error) {
       console.error('Error finding photos:', error);
     }
