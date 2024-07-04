@@ -53,6 +53,12 @@ function reducer(state, action) {
         topicData: action.payload.topics,
       };
 
+    case ACTIONS.GET_PHOTOS_BY_TOPICS:
+      return {
+        ...state,
+        fetchingPhotos: true,
+      };
+
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
@@ -101,7 +107,6 @@ const useApplicationData = () => {
   }, []);
 
   const fetchPhotosByTopic = (topicId) => {
-
     fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
       .then((res) => res.json())
       .then((data) => {
